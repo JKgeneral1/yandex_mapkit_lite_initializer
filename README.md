@@ -1,0 +1,2 @@
+# yandex_mapkit_lite_initializer
+инициализатор YaMapLite
