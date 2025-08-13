@@ -4,17 +4,28 @@ plugins {
 }
 
 android {
-  namespace "com.mycompany.yandex_mapkit_lite_initializer" // ← синхронно с pubspec.yaml
+  namespace "com.mycompany.yandex_mapkit_lite_initializer"  // тот же, что в pubspec.yaml
   compileSdkVersion 35
 
   defaultConfig {
     minSdkVersion 21
   }
 
-  // Никаких специальных flavors/vars не требуется
+  // современные таргеты, чтобы не было предупреждений про Java 8
+  compileOptions {
+    sourceCompatibility JavaVersion.VERSION_17
+    targetCompatibility JavaVersion.VERSION_17
+  }
+  kotlinOptions {
+    jvmTarget = '17'
+  }
 }
 
 dependencies {
-  // Плагин не тянет сторонние зависимости насильно.
-  // MapKit Lite придёт из основного приложения как зависимость пакета yandex_mapkit_lite.
+  // ВАЖНО: чтобы плагин скомпилировался и увидел MapKitFactory.
+  // compileOnly — достаточно для компиляции, не тащит либу в APK (её тянет host-приложение).
+  compileOnly 'com.yandex.android:maps.mobile:4.4.0-lite'
+
+  // Если вдруг host-приложение НЕ тянет yandex_mapkit_lite, можно временно поставить implementation:
+  // implementation 'com.yandex.android:maps.mobile:4.4.0-lite'
 }
