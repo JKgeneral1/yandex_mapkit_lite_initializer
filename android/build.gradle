@@ -1,0 +1,20 @@
+plugins {
+  id "com.android.library"
+  id "kotlin-android"
+}
+
+android {
+  namespace "com.mycompany.yandex_mapkit_lite_initializer" // ← синхронно с pubspec.yaml
+  compileSdkVersion 35
+
+  defaultConfig {
+    minSdkVersion 21
+  }
+
+  // Никаких специальных flavors/vars не требуется
+}
+
+dependencies {
+  // Плагин не тянет сторонние зависимости насильно.
+  // MapKit Lite придёт из основного приложения как зависимость пакета yandex_mapkit_lite.
+}
