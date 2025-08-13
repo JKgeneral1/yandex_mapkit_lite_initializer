@@ -33,7 +33,7 @@ yandex_mapkit_lite_initializer:
     <!-- Ключ Яндекс.Карт -->
     <meta-data
         android:name="com.yandex.maps.apikey"
-        android:value="a48f5331-e968-4790-872c-e1ed03edc175"/>
+        android:value="{API-ключ YandexMap SDK}"/>
 
     <meta-data android:name="flutterEmbedding" android:value="2"/>
   </application>
@@ -51,7 +51,7 @@ class AppDelegate: FlutterAppDelegate {
     _ application: UIApplication,
     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
   ) -> Bool {
-    YMKMapKit.setApiKey("a48f5331-e968-4790-872c-e1ed03edc175")
+    YMKMapKit.setApiKey("{API-ключ YandexMap SDK}")
     GeneratedPluginRegistrant.register(with: self)
     return super.application(application, didFinishLaunchingWithOptions: launchOptions)
   }
