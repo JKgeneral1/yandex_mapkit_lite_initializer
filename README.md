@@ -39,19 +39,6 @@ yandex_mapkit_lite_initializer:
   </application>
 </manifest>
 ```
-Если включён minify, добавьте правила R8/ProGuard:
-```pro
--keep class com.yandex.mapkit.** { *; }
--dontwarn com.yandex.mapkit.**
-```
-> При предупреждениях про Java 8 поднимите таргеты (обычно уже настроено):
-```gradle
-compileOptions {
-  sourceCompatibility JavaVersion.VERSION_17
-  targetCompatibility JavaVersion.VERSION_17
-}
-kotlinOptions { jvmTarget = '17' }
-```
 
 3. **Настроить iOS**  
 В `AppDelegate.swift` укажите ключ (внутри `application(_:didFinishLaunchingWithOptions:)`):
