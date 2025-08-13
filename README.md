@@ -2,18 +2,18 @@
 
 1. **Добавить зависимости в FF**  
    Project Settings → Project Dependencies → Custom Pub Dependencies:
-   
+   ```yaml
 yandex_mapkit_lite: ^2.0.2
 
 yandex_mapkit_lite_initializer:
   git:
     url: https://github.com/JKgeneral1/yandex_mapkit_lite_initializer.git
     ref: main
-   
+   ```
 
 2. **Настроить Android**  
 В `AndroidManifest.xml` добавьте разрешения и meta-data с ключом:
-
+```xml
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
@@ -33,16 +33,29 @@ yandex_mapkit_lite_initializer:
     <!-- Ключ Яндекс.Карт -->
     <meta-data
         android:name="com.yandex.maps.apikey"
-        android:value="{API-ключ Яндекс Карт}"/>
+        android:value="a48f5331-e968-4790-872c-e1ed03edc175"/>
 
     <meta-data android:name="flutterEmbedding" android:value="2"/>
   </application>
 </manifest>
-
+```
+Если включён minify, добавьте правила R8/ProGuard:
+```pro
+-keep class com.yandex.mapkit.** { *; }
+-dontwarn com.yandex.mapkit.**
+```
+> При предупреждениях про Java 8 поднимите таргеты (обычно уже настроено):
+```gradle
+compileOptions {
+  sourceCompatibility JavaVersion.VERSION_17
+  targetCompatibility JavaVersion.VERSION_17
+}
+kotlinOptions { jvmTarget = '17' }
+```
 
 3. **Настроить iOS**  
 В `AppDelegate.swift` укажите ключ (внутри `application(_:didFinishLaunchingWithOptions:)`):
-
+```swift
 import YandexMapsMobile
 
 @UIApplicationMain
@@ -51,17 +64,17 @@ class AppDelegate: FlutterAppDelegate {
     _ application: UIApplication,
     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
   ) -> Bool {
-    YMKMapKit.setApiKey("{API-ключ Яндекс Карт}")
+    YMKMapKit.setApiKey("a48f5331-e968-4790-872c-e1ed03edc175")
     GeneratedPluginRegistrant.register(with: self)
     return super.application(application, didFinishLaunchingWithOptions: launchOptions)
   }
 }
-
+```
 В `Info.plist` добавьте описание доступа к геолокации:
-
+```xml
 <key>NSLocationWhenInUseUsageDescription</key>
 <string>Нужно, чтобы показывать ваше местоположение на карте</string>
-
+```
 
 4. **Добавить кастомный виджет Яндекс карт**  
 Передать параметры (список координат, иконки, центрирование на пользователе).  
