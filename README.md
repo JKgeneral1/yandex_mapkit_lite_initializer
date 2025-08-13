@@ -2,7 +2,8 @@
 
 1. **Добавить зависимости в FF**  
    Project Settings → Project Dependencies → Custom Pub Dependencies:
-   ```yaml
+
+    ```yaml
 yandex_mapkit_lite: ^2.0.2
 
 yandex_mapkit_lite_initializer:
